@@ -19,23 +19,23 @@ def index(request):
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
 
-    return render(request, 'rango/index.html', context = context_dict)
+    return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
     context_dict = {'boldmessage': 'This tutorial has been put together by Bailey'}
-    return render(request, 'rango/about.html', context = context_dict)
+    return render(request, 'rango/about.html', context=context_dict)
 
 def show_category(request, category_name_slug):
     context_dict = {}
     try:
-        category = Category.objects.get(slug = category_name_slug)
-        pages = Page.objects.filter(category = category)#
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
         context_dict['pages'] = pages
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['category'] = None
-    return render(request, 'rango/category.html', context = context_dict)
+    return render(request, 'rango/category.html', context=context_dict)
 
 def add_category(request):
     form = CategoryForm()
@@ -76,4 +76,4 @@ def add_page(request, category_name_slug):
             print(form.errors)
             
     context_dict = {'form': form, 'category': category}
-    return render(request, 'rango/add_page.html', context = context_dict)
+    return render(request, 'rango/add_page.html', context=context_dict)
